@@ -27,20 +27,19 @@
 </script>
 <div class="container mx-auto">
 	{#if $web3Modal && !$connected}
-		<div class="hero bg-base-200 my-24">
+		<div class="hero bg-base-200 my-24 h-1/3 py-12">
 			<div class="hero-content text-center flex-col">
 				<div class="max-w-md">
-					<h1 class="text-5xl font-bold">Hello there</h1>
+					<h1 class="text-5xl font-bold">Connect</h1>
 					<p class="py-6">
-						Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-						quasi. In deleniti eaque aut repudiandae et a id nisi.
+						Connect a wallet which will sponsor the transactions for your agent's signup
 					</p>
-					<button class="btn btn-primary">Get Started</button>
+					<button class="btn btn-primary" onclick={()=> $web3Modal.open()}>Connect Wallet</button>
 				</div>
 			</div>
 		</div>
 	{:else}
-		<div class="navbar bg-base-100">
+		<div class="navbar bg-base-200 my-8 rounded-xl">
 			<div class="flex-1">
 				<p class="btn btn-ghost text-xl">easy-agent</p>
 			</div>
