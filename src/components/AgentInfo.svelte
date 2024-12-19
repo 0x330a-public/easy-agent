@@ -57,15 +57,6 @@
 		}
 	});
 
-	// const addedKey = $derived.by(async () => {
-	// 	const config = $wagmiConfig;
-	// 	if ($fid !== 0n && config) {
-	//
-	// 	} else {
-	// 		return null;
-	// 	}
-	// })
-
 	let edHover = $state(false);
 	let ethHover = $state(false);
 
