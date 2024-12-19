@@ -42,6 +42,7 @@
 		"@noble/ed25519": "^2.1.0",
 		"@noble/hashes": "^1.6.1",
 		"@noble/secp256k1": "^2.1.0",
+		"@sveltejs/adapter-node": "^5.2.11",
 		"@wagmi/connectors": "^5.7.0",
 		"@wagmi/core": "^2.16.0",
 		"svelte-persisted-store": "^0.12.0",
