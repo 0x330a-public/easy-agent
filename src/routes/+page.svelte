@@ -7,6 +7,7 @@
 	import { PUBLIC_WALLET_CONNECT_PROJECT_ID } from "$env/static/public";
 
 	import { web3Modal, connected, disconnectWagmi } from 'svelte-wagmi';
+	import {farcasterFrame} from "@farcaster/frame-wagmi-connector";
 	import PowerIcon from '../components/PowerIcon.svelte';
 	import AgentInfo from '../components/AgentInfo.svelte';
 
@@ -15,7 +16,7 @@
 			appName: "easy-agent",
 			chains: [optimism],
 			walletConnectProjectId: PUBLIC_WALLET_CONNECT_PROJECT_ID,
-			connectors: [injected(), walletConnect({
+			connectors: [injected(), farcasterFrame(), walletConnect({
 				showQrModal: false,
 				projectId: PUBLIC_WALLET_CONNECT_PROJECT_ID
 			})],
