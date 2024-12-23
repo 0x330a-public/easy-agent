@@ -14,6 +14,7 @@
 	import { browser } from '$app/environment';
 	import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 	import { getFid, keyRegistered, signAddKey, signFname, signOnboarding } from '../utils';
+	import { copy } from "svelte-copy";
 
 	const generateNew = () => {
 		const newValue = ed.utils.randomPrivateKey();
@@ -170,12 +171,12 @@
 	<div class="flex flex-col mx-auto p-4 rounded-xl bg-base-200 items-center">
 
 		<p class="text p-2"><b>ed25519 Signer Key (Copy this somewhere safe)</b></p>
-		<pre id="edKey" onmouseleave={leaveElement} onmouseenter={hoverElement} class="textarea w-1/2 mx-auto text-center overflow-auto" contenteditable="false">{edValue}</pre>
+		<pre id="edKey" onmouseleave={leaveElement} onmouseenter={hoverElement} use:copy={edValue} class="textarea w-1/2 mx-auto text-center overflow-auto" contenteditable="false">{edValue}</pre>
 
 		<div class="divider mx-auto w-1/2"></div>
 
 		<p class="text p-2"><b>ETH Secret key (Copy this somewhere safe if you want to manage the fid in future)</b></p>
-		<pre id="ethKey" onmouseleave={leaveElement} onmouseenter={hoverElement}  class="textarea w-1/2 mx-auto text-center overflow-auto">{ethValue}</pre>
+		<pre id="ethKey" onmouseleave={leaveElement} onmouseenter={hoverElement} use:copy={ethValue} class="textarea w-1/2 mx-auto text-center overflow-auto">{ethValue}</pre>
 
 		<div class="divider mx-auto w-1/2"></div>
 
