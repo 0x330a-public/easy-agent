@@ -1,33 +1,8 @@
 <script lang="ts">
 
-	import { defaultConfig } from 'svelte-wagmi';
-	import { onMount } from 'svelte';
-	import { injected, walletConnect } from '@wagmi/connectors';
-	import { optimism } from 'viem/chains';
-	import { PUBLIC_WALLET_CONNECT_PROJECT_ID } from "$env/static/public";
-	import sdk from "@farcaster/frame-sdk";
-
-	import { web3Modal, connected, disconnectWagmi } from 'svelte-wagmi';
-	import {farcasterFrame} from "@farcaster/frame-wagmi-connector";
+	import { connected, disconnectWagmi, web3Modal } from 'svelte-wagmi';
 	import PowerIcon from '../components/PowerIcon.svelte';
 	import AgentInfo from '../components/AgentInfo.svelte';
-
-	onMount(async () => {
-		const easyAgent = defaultConfig({
-			appName: "easy-agent",
-			chains: [optimism],
-			walletConnectProjectId: PUBLIC_WALLET_CONNECT_PROJECT_ID,
-			connectors: [injected(), farcasterFrame(), walletConnect({
-				showQrModal: false,
-				projectId: PUBLIC_WALLET_CONNECT_PROJECT_ID
-			})],
-		})
-
-		await easyAgent.init();
-
-		await sdk.actions.ready();
-
-	})
 
 </script>
 <div class="container mx-auto">
