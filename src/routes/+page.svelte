@@ -5,6 +5,7 @@
 	import { injected, walletConnect } from '@wagmi/connectors';
 	import { optimism } from 'viem/chains';
 	import { PUBLIC_WALLET_CONNECT_PROJECT_ID } from "$env/static/public";
+	import sdk from "@farcaster/frame-sdk";
 
 	import { web3Modal, connected, disconnectWagmi } from 'svelte-wagmi';
 	import {farcasterFrame} from "@farcaster/frame-wagmi-connector";
@@ -23,6 +24,9 @@
 		})
 
 		await easyAgent.init();
+
+		await sdk.actions.ready();
+
 	})
 
 </script>
