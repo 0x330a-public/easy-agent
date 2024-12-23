@@ -3,8 +3,34 @@
 	import { connected, disconnectWagmi, web3Modal } from 'svelte-wagmi';
 	import PowerIcon from '../components/PowerIcon.svelte';
 	import AgentInfo from '../components/AgentInfo.svelte';
+	import { PUBLIC_COOLIFY_FQDN } from '$env/static/public';
+
+	const frame = {
+		version: "next",
+		imageUrl: `${PUBLIC_COOLIFY_FQDN}/og-image.jpg`,
+		button: {
+			title: "Launch",
+			action: {
+				type: "launch_frame",
+				name: "words",
+				url: PUBLIC_COOLIFY_FQDN,
+				splashImageUrl: `${PUBLIC_COOLIFY_FQDN}/splash.jpg`,
+				splashBackgroundColor: "#ffffff",
+			},
+		},
+	}
 
 </script>
+
+<svelte:head>
+	<meta property="og:title" content="Words"/>
+	<meta property="og:description" content="Word game v2 frame in Svelte"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:image" content="{PUBLIC_COOLIFY_FQDN}/splash.jpg"/>
+	<meta property="fc:frame" content={JSON.stringify(frame)} />
+</svelte:head>
+
+
 <div class="container mx-auto">
 	{#if $web3Modal && !$connected}
 		<div class="hero bg-base-200 my-24 h-1/3 py-12">

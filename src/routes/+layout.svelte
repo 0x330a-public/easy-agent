@@ -8,7 +8,7 @@
 	import farcasterFrame from "@farcaster/frame-wagmi-connector";
 
 	import { optimism } from 'viem/chains';
-	import { PUBLIC_WALLET_CONNECT_PROJECT_ID } from "$env/static/public";
+	import { PUBLIC_WALLET_CONNECT_PROJECT_ID } from '$env/static/public';
 	import sdk from "@farcaster/frame-sdk";
 	import { injected, walletConnect } from '@wagmi/connectors';
 
@@ -27,7 +27,10 @@
 
 		await sdk.actions.ready();
 
-	})
+	});
+
+
+
 
 </script>
 
