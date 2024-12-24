@@ -5,12 +5,12 @@
     "signature": "MHgxZTk5ZTc0YWFiNmU2Mjk4MDhmZmVhNGEyMTg2ZTNmNDA1NDYwMGZhNTZlMWRhOTE4NzViOTIyM2MxMTk4ZGMyMDc3NTNhNTlmNWQ3MmNlNzQwNjMxOGU5MTkyYjRlYTEyZmRmMDVkN2Y3Mjg5YjhkNTAwY2I1ZjRlMGUwY2NiMzFi"
   },
   "frame": {
-    "version": "1",
-    "name": "Easy Agent",
-    "iconUrl": "https://agent.frnocap.bet/icon.png",
+    "version": "next",
+    "name": "easy-agent",
+    "iconUrl": "https://agent.frnocap.bet/splash.jpg",
     "homeUrl": "https://agent.frnocap.bet",
-    "imageUrl": "https://agent.frnocap.bet/image.png",
-    "buttonTitle": "Check this out",
+    "imageUrl": "https://agent.frnocap.bet/og-image.jpg",
+    "buttonTitle": "Launch",
     "splashImageUrl": "https://agent.frnocap.bet/splash.png",
     "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://agent.frnocap.bet/api/webhook"
