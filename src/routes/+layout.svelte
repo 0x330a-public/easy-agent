@@ -13,6 +13,7 @@
 	import { injected, walletConnect } from '@wagmi/connectors';
 
 	onMount(async () => {
+		await sdk.actions.ready();
 		const easyAgent = defaultConfig({
 			appName: "easy-agent",
 			chains: [optimism],
@@ -22,11 +23,7 @@
 				projectId: PUBLIC_WALLET_CONNECT_PROJECT_ID
 			})],
 		})
-
 		await easyAgent.init();
-
-		await sdk.actions.ready();
-
 	});
 
 
