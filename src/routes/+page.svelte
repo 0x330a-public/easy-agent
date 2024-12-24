@@ -12,10 +12,10 @@
 			title: "Launch",
 			action: {
 				type: "launch_frame",
-				name: "words",
+				name: "easy-agent",
 				url: PUBLIC_COOLIFY_FQDN,
 				splashImageUrl: `${PUBLIC_COOLIFY_FQDN}/splash.jpg`,
-				splashBackgroundColor: "#ffffff",
+				splashBackgroundColor: "#060c2e",
 			},
 		},
 	}
