@@ -45,7 +45,7 @@
 			</div>
 		</div>
 	{:else}
-		<div class="navbar bg-base-200 my-8 rounded-xl">
+		<div class="navbar bg-base-200 mb-8 rounded-xl">
 			<div class="flex-1">
 				<p class="btn btn-ghost text-xl">easy-agent</p>
 			</div>
