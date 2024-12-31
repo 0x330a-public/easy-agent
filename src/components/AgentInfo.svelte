@@ -1,6 +1,6 @@
 <script lang="ts">
 
-	import { edSk, ethSk } from '../stores';
+	import { edSk, ethMnemonic } from '../stores';
 
 	import { derived as storeDerive, get } from 'svelte/store';
 
@@ -12,7 +12,7 @@
 
 	import { bytesToHex, type Hex, hexToBytes } from 'viem';
 	import { browser } from '$app/environment';
-	import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
+	import { english, generateMnemonic, generatePrivateKey, mnemonicToAccount, privateKeyToAccount } from 'viem/accounts';
 	import { getFid, keyRegistered, signAddKey, signFname, signOnboarding } from '../utils';
 	import { copy } from "svelte-copy";
 
@@ -22,15 +22,15 @@
 	}
 
 	const generateEth = () => {
-		const newValue = generatePrivateKey();
-		ethSk.set(newValue);
+		const mnemonic = generateMnemonic(english)
+		ethMnemonic.set(mnemonic);
 	}
 
 	if (browser) {
 		if (get(edSk) === "0x") {
 			generateNew();
 		}
-		if (get(ethSk) === "0x") {
+		if (get(ethMnemonic) === "") {
 			generateEth();
 		}
 	}
@@ -55,9 +55,10 @@
 
 	const edValue = $derived(edHover ? get(edSk) : "*".repeat(get(edSk).length));
 
-	const ethValue = $derived(ethHover ? get(ethSk) : "*".repeat(get(ethSk).length));
+	const ethValue = $derived(ethHover ? get(ethMnemonic) : "**** ".repeat(get(ethMnemonic).split(" ").length));
 
-	const ethSigner = storeDerive(ethSk, (secretKey) => secretKey !== "0x" ? privateKeyToAccount(secretKey as Hex) : null);
+	// const ethSigner = storeDerive(ethSk, (secretKey) => secretKey !== "0x" ? privateKeyToAccount(secretKey as Hex) : null);
+	const ethSigner = storeDerive(ethMnemonic, (mnemonic) => mnemonic !== "" ? mnemonicToAccount(mnemonic) : null);
 	const ethAddress = $derived($ethSigner?.address || "0x");
 
 	$effect(() => {
@@ -169,13 +170,14 @@
 
 {#if $type === "string"}
 	<div class="flex flex-col mx-auto p-4 rounded-xl bg-base-200 items-center">
+		<p class="text p-2"><b>{get(ethMnemonic)}</b></p>
 
 		<p class="text p-2"><b>ed25519 Signer Key (Copy this somewhere safe)</b></p>
 		<pre id="edKey" onmouseleave={leaveElement} onmouseenter={hoverElement} use:copy={edValue} class="textarea w-1/2 mx-auto text-center overflow-auto" contenteditable="false">{edValue}</pre>
 
 		<div class="divider mx-auto w-1/2"></div>
 
-		<p class="text p-2"><b>ETH Secret key (Copy this somewhere safe if you want to manage the fid in future)</b></p>
+		<p class="text p-2"><b>ETH Seed Phrase (Copy this somewhere safe if you want to manage the fid in future)</b></p>
 		<pre id="ethKey" onmouseleave={leaveElement} onmouseenter={hoverElement} use:copy={ethValue} class="textarea w-1/2 mx-auto text-center overflow-auto">{ethValue}</pre>
 
 		<div class="divider mx-auto w-1/2"></div>

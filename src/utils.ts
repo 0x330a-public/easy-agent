@@ -1,4 +1,4 @@
-import { encodeAbiParameters, type Hex, type PrivateKeyAccount } from 'viem';
+import { encodeAbiParameters, type Account, type Hex } from 'viem';
 import { getEip712Domain } from 'viem/actions';
 import { type Config, readContract, waitForTransactionReceipt, writeContract } from '@wagmi/core';
 import { optimism } from 'viem/chains';
@@ -75,7 +75,7 @@ const getNonce = async (
 
 export const signOnboarding = async (
 	config: Config,
-	signer: PrivateKeyAccount,
+	signer: Account,
 	recovery: Hex
 ): Promise<bigint> => {
 	const nonce = await getNonce(config, ID_GATEWAY_ADDRESS, signer.address);
@@ -91,7 +91,7 @@ export const signOnboarding = async (
 		address: ID_GATEWAY_ADDRESS
 	})
 		.then(async (domain) => {
-			return signer.signTypedData({
+			return signer.signTypedData?.({
 				domain: {
 					name: domain.domain.name,
 					verifyingContract: domain.domain.verifyingContract,
@@ -169,7 +169,7 @@ const metadataTypes = [
 
 export const signAddKey = async (
 	config: Config,
-	signer: PrivateKeyAccount,
+	signer: Account,
 	ed25519PubKey: Hex
 ): Promise<boolean> => {
 	const signerAddress = signer.address;
@@ -194,7 +194,7 @@ export const signAddKey = async (
 		verifyingContract: KEY_GATEWAY_ADDRESS
 	};
 
-	const metadataSignature = await signer.signTypedData({
+	const metadataSignature = await signer.signTypedData?.({
 		domain: validatorDomain,
 		types: {
 			SignedKeyRequest: [
@@ -222,7 +222,7 @@ export const signAddKey = async (
 
 	const metadataBytes = encodeAbiParameters(metadataTypes, [metadataStruct]);
 
-	const addSignature = await signer.signTypedData({
+	const addSignature = await signer.signTypedData?.({
 		domain: keyGatewayDomain,
 		types: {
 			Add: [
@@ -271,14 +271,14 @@ export const signAddKey = async (
 };
 
 
-export const signFname = async (config: Config, signer: PrivateKeyAccount, fname: string): Promise<string|null> => {
+export const signFname = async (config: Config, signer: Account, fname: string): Promise<string|null> => {
 
 	const signerAddress = signer.address;
 
 	const fid = await getFid(config, signerAddress);
 	const timestamp = Math.round(Date.now() / 1000);
 
-	const signature = await signer.signTypedData({
+	const signature = await signer.signTypedData?.({
 		domain: EIP_712_USERNAME_DOMAIN,
 		types: USERNAME_PROOF_EIP_712_TYPES.types,
 		primaryType: "UserNameProof",
@@ -288,6 +288,10 @@ export const signFname = async (config: Config, signer: PrivateKeyAccount, fname
 			timestamp,
 		}
 	});
+
+	if (!signature) {
+		throw new Error("Failed to sign fname");
+	}
 
 	const requestData: RegisterRequest = {
 		name: fname, // Name to register

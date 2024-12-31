@@ -5,6 +5,6 @@ export const edSk = persisted("edSk", "0x", {
 	storage: "local"
 });
 
-export const ethSk = persisted("ethSk", "0x", {
+export const ethMnemonic = persisted("ethMnemonic", "", {
 	storage: "local"
 })
