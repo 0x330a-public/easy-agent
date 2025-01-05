@@ -170,7 +170,6 @@
 
 {#if $type === "string"}
 	<div class="flex flex-col mx-auto p-4 rounded-xl bg-base-200 items-center">
-		<p class="text p-2"><b>{get(ethMnemonic)}</b></p>
 
 		<p class="text p-2"><b>ed25519 Signer Key (Copy this somewhere safe)</b></p>
 		<pre id="edKey" onmouseleave={leaveElement} onmouseenter={hoverElement} use:copy={edValue} class="textarea w-1/2 mx-auto text-center overflow-auto" contenteditable="false">{edValue}</pre>
